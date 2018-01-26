@@ -1,0 +1,13 @@
+Package: zu
+Type: Package
+Title: Zygonergy assessment Utilities - assess genes that are linked in collaboration
+Version: 0.1.0
+Author: Boris Steipe et al.
+Maintainer: Boris Steipe <boris.steipe@utoronto.ca>
+Description: zu combines code to build tools for the assessment of the collaboration status of genes in biological systems.
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+Suggests:
+    testthat
+RoxygenNote: 6.0.1

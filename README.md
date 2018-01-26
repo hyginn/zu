@@ -1,9 +1,6 @@
 # zu
 
-## Z-ygonergy assessment U-tilities (*)
-## Also: zǔ (組, 组) to to organize, group and MW for groups
-
-(*) from greek ζυγόν (yoke) and ἐργάτης worker: utilities to assess which genes are linked together through their collaboration in biological systems. Quite a forced backronym actually.
+### zǔ (組, 组) to to organize, group and MW for groups
 
 This is a BCB420/JTB2020 project in computational systems biology at the University of Toronto. If you are not enrolled in this course, this code is unlikely to be useful to you.
 

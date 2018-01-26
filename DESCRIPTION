@@ -1,6 +1,6 @@
 Package: zu
 Type: Package
-Title: Zygonergy assessment Utilities - assess genes that are linked in collaboration
+Title: Zu (organize, group) - Group genes to systems
 Version: 0.1.0
 Author: Boris Steipe et al.
 Maintainer: Boris Steipe <boris.steipe@utoronto.ca>

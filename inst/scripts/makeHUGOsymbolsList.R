@@ -9,11 +9,12 @@
 #           containing all HUGO symbols for the above categories. They are
 #           confirmed to be unique and they CAN be used as rownames.
 #
-# Version:  1.0
+# Version:  1.1
 # Date:     2018 01 25
 # Author:   Boris Steipe <boris.steipe@utoronto.ca>
 #
 # Version history:
+#           1.1  refactor code
 #           1.0  production dataset, January 2018
 #
 # ToDo:
@@ -24,13 +25,18 @@
 
 # ====  PARAMETERS  ============================================================
 
-ORF <-  "ftp://ftp.ebi.ac.uk/pub/databases/genenames/new/tsv/locus_types/gene_with_protein_product.txt"
-rRNA <- "ftp://ftp.ebi.ac.uk/pub/databases/genenames/new/tsv/locus_types/RNA_ribosomal.txt"
-tRNA <- "ftp://ftp.ebi.ac.uk/pub/databases/genenames/new/tsv/locus_types/RNA_transfer.txt"
-vRNA <- "ftp://ftp.ebi.ac.uk/pub/databases/genenames/new/tsv/locus_types/RNA_vault.txt"
-TCR <-  "ftp://ftp.ebi.ac.uk/pub/databases/genenames/new/tsv/locus_types/T_cell_receptor_gene.txt"
-IG <-   "ftp://ftp.ebi.ac.uk/pub/databases/genenames/new/tsv/locus_types/immunoglobulin_gene.txt"
-PCDH <- "ftp://ftp.ebi.ac.uk/pub/databases/genenames/new/tsv/locus_types/protocadherin.txt"
+BASEURL <- "ftp://ftp.ebi.ac.uk/pub/databases/genenames/new/tsv/locus_types/"
+
+myHUGOfiles <- data.frame(tags = c("ORF", "rRNA", "tRNA", "vRNA",
+                                   "TCR", "IG", "PCDH"),
+                          fNames = c("gene_with_protein_product.txt",
+                                     "RNA_ribosomal.txt",
+                                     "RNA_transfer.txt",
+                                     "RNA_vault.txt",
+                                     "T_cell_receptor_gene.txt",
+                                     "immunoglobulin_gene.txt",
+                                     "protocadherin.txt"),
+                          stringsAsFactors = FALSE)
 
 
 # ====  PACKAGES  ==============================================================
@@ -41,34 +47,16 @@ if (! require(readr, quietly=TRUE)) {
 }
 
 # ====  PROCESS  ===============================================================
-tmp <- read_tsv(ORF)
-str(tmp$symbol)
-HUGOsymbols <- tmp$symbol
 
-tmp <- read_tsv(rRNA)
-str(tmp$symbol)
-HUGOsymbols <- c(HUGOsymbols, tmp$symbol)
 
-tmp <- read_tsv(tRNA)
-str(tmp$symbol)
-HUGOsymbols <- c(HUGOsymbols, tmp$symbol)
+HUGOsymbols <- character()
 
-tmp <- read_tsv(vRNA)
-str(tmp$symbol)
-HUGOsymbols <- c(HUGOsymbols, tmp$symbol)
-
-tmp <- read_tsv(TCR)
-str(tmp$symbol)
-HUGOsymbols <- c(HUGOsymbols, tmp$symbol)
-
-tmp <- read_tsv(IG)
-str(tmp$symbol)
-HUGOsymbols <- c(HUGOsymbols, tmp$symbol)
-
-tmp <- read_tsv(PCDH)
-str(tmp$symbol)
-HUGOsymbols <- c(HUGOsymbols, tmp$symbol)
-
+# ftp all required datasets and get $symbol column
+for (fName in myHUGOfiles$fNames) {
+  tmp <- read_tsv(paste0(BASEURL, fName))
+  HUGOsymbols <- c(HUGOsymbols, tmp$symbol)
+}
+rm(tmp)
 
 # assess
 any(duplicated(HUGOsymbols))   # Must be FALSE

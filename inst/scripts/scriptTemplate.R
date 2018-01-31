@@ -68,7 +68,7 @@ myFunction <- function(a, b=1) {
 
 
 # ====  TESTS  =================================================================
-# Enter your tests here...  (Note: these are not test for functions in the
+# Enter your tests here...  (Note: these are not tests for functions in the
 # package!)
 
 
